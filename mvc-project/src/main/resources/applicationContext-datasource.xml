@@ -6,9 +6,9 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="org.mariadb.jdbc.Driver"/>
-        <property name="url" value="jdbc:mariadb://comento-db.cxw60aio6p3o.ap-northeast-2.rds.amazonaws.com:43306/statistic"></property>
-        <property name="username" value="admin"/>
-        <property name="password" value="devfunpj12345"/>
+        <property name="url" value="..."></property>
+        <property name="username" value="..."/>
+        <property name="password" value="..."/>
     </bean>
     <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
