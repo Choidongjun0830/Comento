@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 매퍼의 네임스페이스 정의 자바 인터페이스와 XML 파일 연결-->
+<mapper namespace="com.demo.comentoStatistic.dao.StatisticMapper">
+    <!-- id는 SQL문의 고유 식별자. 매퍼 인터페이스에서 이 이름으로 메서드 호출 concat은 20**으로 보이게 -->
+    <select id="selectYearLogin" parameterType="string" resultType="YearCountDto">
+        select concat('20', #{year}) as year, count(*) as totCnt
+        from statistic4.requestInfo ri
+        where left(ri.createDate, 2) = #{year};
+    </select>
+    <!-- 월별 접속자 수-->
+    <select id="selectYearMonthLogin" parameterType="string" resultType="YearMonthCountDto">
+        select concat('20', #{yearMonth}) as yearMonth, count(*) as totCnt
+        from statistic4.requestInfo ri
+        where left(ri.createDate, 4) = #{yearMonth};
+    </select>
+
+    <!--  일자별 접속자 수  -->
+    <select id="selectYearMonthDayLogin" parameterType="string" resultType="YearMonthDayCountDto">
+        select concat('20', #{yearMonthDay}) as yearMonthDay, count(*) as totCnt
+        from statistic4.requestInfo ri
+        where left(ri.createDate, 6) = #{yearMonthDay};
+    </select>
+
+    <!--  평균 하루 로그인 수 -->
+    <select id="selectAvgDayLoginCount" resultType="AvgDayCountDto">
+        select avg(daily_login_count) as avgCnt
+        from (
+            select count(*) as daily_login_count
+            from statistic4.requestInfo ri
+            group by ri.createDate
+             ) as daily_counts;
+    </select>
+    <!--  휴일을 제외한 로그인 수-->
+    <!-- 휴일 데이터베이스를 holiday라고 가정
+        select count(*), ri.createDate
+        from statistic4.requestInfo ri
+            left join
+            holiday h on ri.createDate = h.holidayDate
+        where h.holidayDate is null;
+
+    -->
+
+    <!-- 부서별 월별 로그인 수-->
+    <!-- DB에 department라는 컬럼이 있다고 가정
+        select department, left(createDate,6), count(*)
+        from statistic4.requestInfo ri
+        group by ri.department, left(createDate,6);
+    -->
+</mapper>
