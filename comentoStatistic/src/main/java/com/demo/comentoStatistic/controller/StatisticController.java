@@ -1,5 +1,6 @@
 package com.demo.comentoStatistic.controller;
 
+import com.demo.comentoStatistic.dto.DepartmentMonthCountDto;
 import com.demo.comentoStatistic.dto.YearCountDto;
 import com.demo.comentoStatistic.service.StatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class StatisticController {
@@ -40,6 +43,16 @@ public class StatisticController {
         return ResponseEntity.ok(statisticService.getAvgDayLoginCount());
     }
     ///휴일을 제외한 로그인 수
+    @RequestMapping(value = "api/v1/logins/non-holiday", produces = "application/json")
+    @ResponseBody
+    public Object getNonHolidayLoginCount() {
+        return ResponseEntity.ok(statisticService.getNonHolidayLoginCount());
+    }
 
     //부서별 월별 로그인 수
+    @RequestMapping(value = "api/v1/logins/department", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<List<DepartmentMonthCountDto>> getDepartmentLoginCount() {
+        return ResponseEntity.ok(statisticService.getDepartmentMonthLoginCount());
+    }
 }

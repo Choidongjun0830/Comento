@@ -1,10 +1,10 @@
 package com.demo.comentoStatistic.dao;
 
-import com.demo.comentoStatistic.dto.AvgDayCountDto;
-import com.demo.comentoStatistic.dto.YearCountDto;
-import com.demo.comentoStatistic.dto.YearMonthCountDto;
-import com.demo.comentoStatistic.dto.YearMonthDayCountDto;
+import com.demo.comentoStatistic.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface StatisticMapper {
@@ -13,4 +13,6 @@ public interface StatisticMapper {
     YearMonthCountDto selectYearMonthLogin(String yearMonth);
     YearMonthDayCountDto selectYearMonthDayLogin(String yearMonthDay);
     AvgDayCountDto selectAvgDayLoginCount();
+    NonHolidayDto selectNonHolidayLoginCount();
+    List<DepartmentMonthCountDto> selectDepartmentMonthLoginCount();
 }

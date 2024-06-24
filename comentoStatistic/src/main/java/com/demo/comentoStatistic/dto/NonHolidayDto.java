@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class YearCountDto {
-    String year;
+public class NonHolidayDto {
     Integer totCnt;
 }

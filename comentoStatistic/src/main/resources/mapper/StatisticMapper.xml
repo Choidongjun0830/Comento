@@ -35,19 +35,20 @@
              ) as daily_counts;
     </select>
     <!--  휴일을 제외한 로그인 수-->
-    <!-- 휴일 데이터베이스를 holiday라고 가정
-        select count(*), ri.createDate
+    <select id="selectNonHolidayLoginCount" resultType="NonHolidayDto">
+        select count(*) as totCnt
         from statistic4.requestInfo ri
-            left join
-            holiday h on ri.createDate = h.holidayDate
+                 left join
+             holidays h on ri.createDate = h.holidayDate
         where h.holidayDate is null;
+    </select>
 
-    -->
 
     <!-- 부서별 월별 로그인 수-->
-    <!-- DB에 department라는 컬럼이 있다고 가정
-        select department, left(createDate,6), count(*)
+    <select id="selectDepartmentMonthLoginCount" resultType="DepartmentMonthCountDto">
+        select department as departmentName, left(createDate,4) as yearMonth, count(*) as totCnt
         from statistic4.requestInfo ri
-        group by ri.department, left(createDate,6);
-    -->
+        group by ri.department, left(createDate,4);
+    </select>
+
 </mapper>

@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class YearCountDto {
-    String year;
+public class DepartmentMonthCountDto {
+    String departmentName;
+    String yearMonth;
     Integer totCnt;
 }

@@ -1,12 +1,11 @@
 package com.demo.comentoStatistic.service;
 
 import com.demo.comentoStatistic.dao.StatisticMapper;
-import com.demo.comentoStatistic.dto.AvgDayCountDto;
-import com.demo.comentoStatistic.dto.YearCountDto;
-import com.demo.comentoStatistic.dto.YearMonthCountDto;
-import com.demo.comentoStatistic.dto.YearMonthDayCountDto;
+import com.demo.comentoStatistic.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StatisticService {
@@ -28,5 +27,13 @@ public class StatisticService {
 
     public AvgDayCountDto getAvgDayLoginCount() {
         return statisticMapper.selectAvgDayLoginCount();
+    }
+
+    public List<DepartmentMonthCountDto> getDepartmentMonthLoginCount() {
+        return statisticMapper.selectDepartmentMonthLoginCount();
+    }
+
+    public NonHolidayDto getNonHolidayLoginCount() {
+        return statisticMapper.selectNonHolidayLoginCount();
     }
 }
